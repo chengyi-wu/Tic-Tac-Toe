@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     
     var state : Array<String> = Array(repeating:" ", count:9)
     var cache: [String: Int] = [:]
-    
+    var stateCache : [String: Array<Array<String>>] = [:]
+
     let endStates = [
         [0, 1, 2],
         [3, 4, 5],
@@ -64,10 +65,17 @@ class ViewController: UIViewController {
     }
     
     func play(state:Array<String>, sym:String) -> Array<Array<String>> {
+        let key = state.joined()
+        if(stateCache.keys.contains(key)) {
+            return stateCache[key]!
+        }
         var nextSym = "O"
         if (sym == nextSym) { nextSym = "X" }
         if (!state.contains(" "))
-        { return [state] }
+        {
+            stateCache[key] = [state]
+            return stateCache[key]!
+        }
         var states = Array<Array<String>>()
         for i in 0...8
         {
@@ -79,6 +87,7 @@ class ViewController: UIViewController {
                 states.append(s)
             }
         }
+        stateCache[key] = states
         return states
     }
     
