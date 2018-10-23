@@ -61,7 +61,10 @@ class ViewController: UIViewController {
     }
     
     func clearState(){
-        state = Array(repeating:" ", count:9)
+        for i in 0...8
+        {
+            state[i] = " "
+        }
     }
     
     func play(state:Array<String>, sym:String) -> Array<Array<String>> {
