@@ -107,6 +107,10 @@ class ViewController: UIViewController {
                 if (state[i] != " ") { continue }
                 var t = state
                 t[i] = "O"
+                if(checkStates(t)){
+                    move = i;
+                    break;
+                }
                 var local = 0
                 for s in play(state: t, sym: "X")
                 {
